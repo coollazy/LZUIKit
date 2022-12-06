@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "LZButton",
     platforms: [
-        .iOS(.v13),
+        .iOS(.v10),
     ],
     products: [
         .library(
@@ -18,7 +18,7 @@ let package = Package(
             ]),
     ],
     dependencies: [
-        .package(name: "RxSwift", url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0")),
+        .package(name: "RxSwift", url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.0.0")),
     ],
     targets: [
         .target(
@@ -32,8 +32,9 @@ let package = Package(
         .target(
             name: "rx",
             dependencies: [
-                .product(name: "RxSwift", package: "RxSwift"),
                 .target(name: "LZButton"),
+                .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "RxCocoa", package: "RxSwift"),
             ]),
         .testTarget(
             name: "LZButtonTests",
