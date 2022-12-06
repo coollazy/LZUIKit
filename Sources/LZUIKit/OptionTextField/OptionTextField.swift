@@ -3,8 +3,8 @@ import UIKit
 public class OptionTextField: UITextField {
     private let toolBar = UIToolbar()
     private let pickerView = UIPickerView()
-    var selectedOption = "請選擇"
-    var options: [String]? {
+    public var selectedOption = "請選擇"
+    public var options: [String]? {
         didSet {
             if let options = options {
                 selectedOption = options.first ?? ""

@@ -66,7 +66,61 @@ let button = UIButton()
 
 ## ControllerItem
 
+- Create a controller item with controller name
+
+```
+let contollerItem = ControllerItem(controller: "ViewControllerName", nibName: "NibName")
+```
+
+- Get the instance of view controller name
+
+```
+let viewController: UIViewController? = controllerItem.viewController
+```
+
 ## LoadingView
 
+- This is UIViewController's extension
+- Call `showLoadingView` using the view controller instance while you want to show loading view
+- Call `hideLoadingView` using the view controller instance while you want to hide loading view
+
+
 ## OptionTextField
+
+- A TextField with options showed with PickerView
+
+```
+let optionTextField = OptionTextField()
+	.setSelectedOption("請選擇")
+	.setOptions(["1", "2", "3"])
+
+```
+
+## TableViewEmptyMessage
+
+- Enable the empty message in the `AppDelegate.swift`
+
+```
+UITableView.enableEmptyMessage()
+```
+
+- Set the empty message for each table
+
+```
+let tableView = UITableView()
+	.setEmptyMessage("This message will show when tableview is empty")
+	.setEmptyMessageFontSize(17)
+	.setEmptyMessageFontWeight(.bold)
+	.setEmptyMessageColor(.lightGray)
+```
+
+## View Corner
+
+- Make a corner to the UIView, and all the sub class of the UIView
+
+```
+let view = UIView()
+	.setCornerType(.halfCorner)
+	.setCornerLength(10)
+```
 
