@@ -1,7 +1,7 @@
 import XCTest
 
-import LZButtonTests
+import LZUIKitTests
 
 var tests = [XCTestCaseEntry]()
-tests += LZButtonTests.allTests()
+tests += LZUIKitTests.allTests()
 XCTMain(tests)

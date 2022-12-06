@@ -1,7 +1,7 @@
 import XCTest
-@testable import LZButton
+@testable import LZUIKit
 
-final class LZButtonTests: XCTestCase {
+final class LZUIKitTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct

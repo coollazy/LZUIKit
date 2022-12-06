@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LZButton",
+    name: "LZUIKit",
     platforms: [
         .iOS(.v10),
     ],
@@ -12,23 +12,7 @@ let package = Package(
         .library(
             name: "LZUIKit",
             targets: [
-                "LZButton",
-            ]),
-        .library(
-            name: "LZUIKit+RxSwift",
-            targets: [
-                "LZButton+RxSwift",
-            ]),
-        .library(
-            name: "LZButton",
-            targets: [
-                "LZButton",
-            ]),
-        .library(
-            name: "LZButton+RxSwift",
-            targets: [
-                "LZButton",
-                "LZButton+RxSwift",
+                "LZUIKit",
             ]),
     ],
     dependencies: [
@@ -36,19 +20,16 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "LZButton",
-            dependencies: []
-        ),
-        .target(
-            name: "LZButton+RxSwift",
+            name: "LZUIKit",
             dependencies: [
-                .target(name: "LZButton"),
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxCocoa", package: "RxSwift"),
             ]
         ),
         .testTarget(
-            name: "LZButtonTests",
-            dependencies: ["LZButton"]),
+            name: "LZUIKitTests",
+            dependencies: [
+                "LZUIKit"
+            ]),
     ]
 )

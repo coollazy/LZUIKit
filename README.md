@@ -1,5 +1,6 @@
-# LZButton
-UIButton extension for visibling property
+# LZUIKit
+
+LZUIKit is extension of the UIKit
 
 # How to install
 
@@ -8,13 +9,13 @@ UIButton extension for visibling property
 - Basic version
 
 ```
-pod 'LZButton', '~> 1.0.0'
+pod 'LZUIKit', '~> 1.0.0'
 ```
 
 - RxSwift supported
 
 ```
-pod 'LZButton/RxSwift', '~> 1.0.0'
+pod 'LZUIKit+RxSwift', '~> 1.0.0'
 ```
 
 ### SPM
@@ -22,16 +23,18 @@ pod 'LZButton/RxSwift', '~> 1.0.0'
 - Package.swift 的 dependencies 增加
 
 ```
-.package(name: "LZButton", url: "https://github.com/coollazy/LZButton.git", .upToNextMajor(from: "1.0.0")),
+.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "1.0.0")),
 ```
 
 - target 的 dependencies 增加
 
 ```
-.product(name: "LZButton", package: "LZButton"),
+.product(name: "LZUIKit", package: "LZUIKit"),
 ```
 
 # How to use
+
+## Button
 
 - Create a UIButton
 
@@ -60,4 +63,10 @@ let button = UIButton()
 	.setDisabledBackgroundColor(.gray)
 	.setIsVisibled(true)
 ```
+
+## ControllerItem
+
+## LoadingView
+
+## OptionTextField
 
