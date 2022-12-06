@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.swift_version   = "5.0.0"
   s.summary         = "LZUIKit"
   s.description     = <<-DESC
-                      LZUIKit is a UIKit extension.
+                      LZUIKit is an extension of UIKit.
                       DESC
 
   s.homepage        = "https://github.com/coollazy/LZUIKit.git"
@@ -87,9 +87,13 @@ Pod::Spec.new do |s|
 
   s.subspec "ViewController+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/ViewController+RxSwift/**/*.{swift}"
+    ss.dependency "RxSwift", "~> 5.0"
+    ss.dependency "RxCocoa", "~> 5.0"
   end
 
   s.subspec "TabBarController+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/TabBarController+RxSwift/**/*.{swift}"
+    ss.dependency "RxSwift", "~> 5.0"
+    ss.dependency "RxCocoa", "~> 5.0"
   end
 end

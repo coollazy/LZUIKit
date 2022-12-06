@@ -1,6 +1,6 @@
 # LZUIKit
 
-LZUIKit is extension of the UIKit
+LZUIKit is an extension of UIKit
 
 # How to install
 
@@ -37,25 +37,8 @@ pod 'LZUIKit+RxSwift', '~> 1.0.0'
 ## Button
 
 - Create a UIButton
-
-```
-let button = UIButton()
-```
-
 - Set the background color for visibled(default is clear) and disabled(default is gray)
-
-```
-button.visibledBackgroundColor = .yellow
-button.disabledBackgroundColor = .gray
-```
-
 - Set the isVisibled to true or false
-
-```
-button.isVisibled = true
-```
-
-### Fluent interface
 
 ```
 let button = UIButton()
