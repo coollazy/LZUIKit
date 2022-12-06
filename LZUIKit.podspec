@@ -29,6 +29,7 @@ Pod::Spec.new do |s|
     ss.dependency "LZUIKit/ControllerItem+RxSwift"
     ss.dependency "LZUIKit/LoadingView+RxSwift"
     ss.dependency "LZUIKit/OptionTextField+RxSwift"
+    ss.dependency "LZUIKit/TableViewEmptyMessage+RxSwift"
     ss.dependency "LZUIKit/ViewController+RxSwift"
     ss.dependency "LZUIKit/TabBarController+RxSwift"
   end
@@ -79,6 +80,13 @@ Pod::Spec.new do |s|
 
   s.subspec "TableViewEmptyMessage" do |ss|
     ss.source_files = "Sources/LZUIKit/TableViewEmptyMessage/**/*.{swift}"
+  end
+  
+  s.subspec "TableViewEmptyMessage+RxSwift" do |ss|
+    ss.source_files = "Sources/LZUIKit/TableViewEmptyMessage+RxSwift/**/*.{swift}"
+    ss.dependency "LZUIKit/TableViewEmptyMessage"
+    ss.dependency "RxSwift", "~> 5.0"
+    ss.dependency "RxCocoa", "~> 5.0"
   end
 
   s.subspec "View" do |ss|
