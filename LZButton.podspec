@@ -14,10 +14,10 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://github.com/coollazy/LZButton.git", :tag => s.version }
   s.default_subspec = "Core"
   s.subspec "Core" do |ss|
-    ss.source_files  = "Sources/LZButton/**/*.{swift}", "Sources/Fluent/**/*.{swift}"
+    ss.source_files  = "Sources/LZButton/**/*.{swift}"
   end
   s.subspec "RxSwift" do |ss|
-    ss.source_files = "Sources/rx/**/*.{swift}"
+    ss.source_files = "Sources/LZButton+RxSwift/*.{swift}"
     ss.dependency "LZButton/Core"
     ss.dependency "RxSwift", "~> 5.0"
     ss.dependency "RxCocoa", "~> 5.0"

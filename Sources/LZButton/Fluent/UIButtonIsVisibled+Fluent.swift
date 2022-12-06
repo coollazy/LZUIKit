@@ -1,5 +1,4 @@
 import UIKit
-import LZButton
 
 extension UIButton {
     @discardableResult public func setVisibledBackgroundColor(_ color: UIColor) -> Self {

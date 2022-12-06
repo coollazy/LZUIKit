@@ -10,11 +10,25 @@ let package = Package(
     ],
     products: [
         .library(
+            name: "LZUIKit",
+            targets: [
+                "LZButton",
+            ]),
+        .library(
+            name: "LZUIKit+RxSwift",
+            targets: [
+                "LZButton+RxSwift",
+            ]),
+        .library(
             name: "LZButton",
             targets: [
                 "LZButton",
-                "Fluent",
-                "rx",
+            ]),
+        .library(
+            name: "LZButton+RxSwift",
+            targets: [
+                "LZButton",
+                "LZButton+RxSwift",
             ]),
     ],
     dependencies: [
@@ -23,19 +37,16 @@ let package = Package(
     targets: [
         .target(
             name: "LZButton",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
-            name: "Fluent",
-            dependencies: [
-                .target(name: "LZButton"),
-            ]),
-        .target(
-            name: "rx",
+            name: "LZButton+RxSwift",
             dependencies: [
                 .target(name: "LZButton"),
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxCocoa", package: "RxSwift"),
-            ]),
+            ]
+        ),
         .testTarget(
             name: "LZButtonTests",
             dependencies: ["LZButton"]),
