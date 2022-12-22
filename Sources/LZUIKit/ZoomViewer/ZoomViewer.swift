@@ -7,6 +7,7 @@ public class ZoomViewer: UIView {
     private let contentView: UIView = UIView()
     private var scaleFactor: CGFloat = 1.0
     private var numberOfViews: Int = 0
+    private var selectedIndex: Int?
     
     public weak var dataSource: ZoomViewerDataSource?
     
@@ -99,26 +100,6 @@ public class ZoomViewer: UIView {
         }
     }
     
-    public func reloadData() {
-        guard let dataSource = dataSource else {
-            print("[ERROR][ZoomViewer] Please set data source")
-            return
-        }
-        
-        numberOfViews = dataSource.zoomViewerNumberOfViews(self)
-        if direction == .horizontal {
-            scrollView.contentSize = .init(width: frame.width * scaleFactor * CGFloat(numberOfViews), height: frame.height * scaleFactor)
-        }
-        else {
-            scrollView.contentSize = .init(width: frame.width * scaleFactor, height: frame.height * scaleFactor * CGFloat(numberOfViews))
-        }
-        contentView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
-        
-        if numberOfViews > 0 {
-            preloadContentViewAt(index: currentIndex)
-        }
-    }
-    
     // 預載畫面(預載上一頁及下一頁)
     fileprivate func preloadContentViewAt(index: Int) {
         // 加載上一頁
@@ -145,10 +126,20 @@ public class ZoomViewer: UIView {
             let container = containers[containerIndex]
             let view = dataSource.zoomViewer(self, view: container, atIndex: index)
             if direction == .horizontal {
-                container.frame = .init(x: scrollView.frame.width * CGFloat(index), y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+                container.frame = .init(
+                    x: scrollView.frame.width * CGFloat(index),
+                    y: 0,
+                    width: scrollView.frame.width,
+                    height: scrollView.frame.height
+                )
             }
             else {
-                container.frame = .init(x: 0, y: scrollView.frame.height * CGFloat(index), width: scrollView.frame.width, height: scrollView.frame.height)
+                container.frame = .init(
+                    x: 0,
+                    y: scrollView.frame.height * CGFloat(index),
+                    width: scrollView.frame.width,
+                    height: scrollView.frame.height
+                )
             }
             
             if view.superview != contentView {
@@ -156,6 +147,49 @@ public class ZoomViewer: UIView {
                 contentView.addSubview(view)
             }
         }
+    }
+}
+
+extension ZoomViewer {
+    public func reloadData() {
+        guard let dataSource = dataSource else {
+            print("[ERROR][ZoomViewer] Please set data source")
+            return
+        }
+        
+        numberOfViews = dataSource.zoomViewerNumberOfViews(self)
+        if direction == .horizontal {
+            scrollView.contentSize = .init(width: frame.width * scaleFactor * CGFloat(numberOfViews), height: frame.height * scaleFactor)
+        }
+        else {
+            scrollView.contentSize = .init(width: frame.width * scaleFactor, height: frame.height * scaleFactor * CGFloat(numberOfViews))
+        }
+        contentView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        
+        if numberOfViews > 0 {
+            preloadContentViewAt(index: currentIndex)
+        }
+        
+        if let selectedIndex = selectedIndex {
+            setCurrentIndex(selectedIndex, animated: false)
+            self.selectedIndex = nil
+        }
+    }
+    
+    @discardableResult
+    public func setCurrentIndex(_ index: Int, animated: Bool = true) -> Self {
+        selectedIndex = index
+        if index >= 0, index < numberOfViews {
+            if direction == .horizontal {
+                let x = CGFloat(index) * scaleFactor * scrollView.frame.width
+                scrollView.setContentOffset(.init(x: x, y: 0), animated: animated)
+            }
+            else {
+                let y = CGFloat(index) * scaleFactor * scrollView.frame.height
+                scrollView.setContentOffset(.init(x: 0, y: y), animated: animated)
+            }
+        }
+        return self
     }
 }
 
@@ -176,5 +210,13 @@ extension ZoomViewer: UIScrollViewDelegate {
         // 將最後的縮放值記錄下來
         scaleFactor = scale
         preloadContentViewAt(index: currentIndex)
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
     }
 }
