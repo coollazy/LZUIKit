@@ -42,9 +42,9 @@ pod 'LZUIKit+RxSwift', '~> 1.1.1'
 
 ```
 let button = UIButton()
-	.setVisibledBackgroundColor(.yellow)
-	.setDisabledBackgroundColor(.gray)
-	.setIsVisibled(true)
+    .setVisibledBackgroundColor(.yellow)
+    .setDisabledBackgroundColor(.gray)
+    .setIsVisibled(true)
 ```
 
 ## ControllerItem
@@ -74,8 +74,8 @@ let viewController: UIViewController? = controllerItem.viewController
 
 ```
 let optionTextField = OptionTextField()
-	.setSelectedOption("請選擇")
-	.setOptions(["1", "2", "3"])
+    .setSelectedOption("請選擇")
+    .setOptions(["1", "2", "3"])
 
 ```
 
@@ -91,10 +91,10 @@ UITableView.enableEmptyMessage()
 
 ```
 let tableView = UITableView()
-	.setEmptyMessage("This message will show when tableview is empty")
-	.setEmptyMessageFontSize(17)
-	.setEmptyMessageFontWeight(.bold)
-	.setEmptyMessageColor(.lightGray)
+    .setEmptyMessage("This message will show when tableview is empty")
+    .setEmptyMessageFontSize(17)
+    .setEmptyMessageFontWeight(.bold)
+    .setEmptyMessageColor(.lightGray)
 ```
 
 ## View Corner
@@ -103,8 +103,8 @@ let tableView = UITableView()
 
 ```
 let view = UIView()
-	.setCornerType(.halfCorner)
-	.setCornerLength(10)
+    .setCornerType(.halfCorner)
+    .setCornerLength(10)
 ```
 
 ## Zoom Viewer
@@ -134,8 +134,8 @@ let zoomViewer = ZoomViewer()
 ```
 extension YourViewController: ZoomViewerDataSource {
     func zoomViewerCreateView() -> UIView {
-		 // Return the view you want to use
-		 UIImageView()
+        // Return the view you want to use
+        UIImageView()
     }
     
     func zoomViewerNumberOfViews(_ zoomViewer: ZoomViewer) -> Int {
