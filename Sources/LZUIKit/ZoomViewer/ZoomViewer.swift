@@ -8,8 +8,13 @@ public class ZoomViewer: UIView {
     private var scaleFactor: CGFloat = 1.0
     private var numberOfViews: Int = 0
     private var selectedIndex: Int?
+    private let topLoadingView = UIActivityIndicatorView()
+    private let bottomLoadingView = UIActivityIndicatorView()
+    private let leftLoadingView = UIActivityIndicatorView()
+    private let rightLoadingView = UIActivityIndicatorView()
     
     public weak var dataSource: ZoomViewerDataSource?
+    public weak var delegate: ZoomViewerDelegate?
     
     public var currentIndex: Int {
         if direction == .horizontal {
@@ -64,19 +69,17 @@ public class ZoomViewer: UIView {
             scrollView.showsVerticalScrollIndicator
         }
     }
-    public var bouncesZoom: Bool {
-        set {
-            scrollView.bouncesZoom = newValue
-        }
-        get {
-            scrollView.bouncesZoom
-        }
-    }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        scrollView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        contentView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        scrollView.frame = .init(x: 0, y: 0, width: frame.width, height: frame.height)
+        contentView.frame = .init(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        
+        topLoadingView.frame = .init(x: 0, y: -50, width: scrollView.frame.width, height: 50)
+        bottomLoadingView.frame = .init(x: 0, y: scrollView.frame.height + 50, width: scrollView.frame.width, height: 50)
+        leftLoadingView.frame = .init(x: -50, y: 0, width: 50, height: scrollView.frame.height)
+        rightLoadingView.frame = .init(x: scrollView.frame.width + 50, y: 0, width: 50, height: scrollView.frame.height)
+        
         reloadData()
     }
     
@@ -98,6 +101,24 @@ public class ZoomViewer: UIView {
             containers.append(container)
             contentView.addSubview(container)
         }
+        
+        topLoadingView.frame = .init(x: 0, y: -50, width: scrollView.frame.width, height: 50)
+        topLoadingView.hidesWhenStopped = true
+        
+        bottomLoadingView.frame = .init(x: 0, y: scrollView.frame.height + 50, width: scrollView.frame.width, height: 50)
+        bottomLoadingView.hidesWhenStopped = true
+        
+        leftLoadingView.frame = .init(x: -50, y: 0, width: 50, height: scrollView.frame.height)
+        leftLoadingView.hidesWhenStopped = true
+        
+        rightLoadingView.frame = .init(x: scrollView.frame.width + 50, y: 0, width: 50, height: scrollView.frame.height)
+        rightLoadingView.hidesWhenStopped = true
+        
+        scrollView.addSubview(topLoadingView)
+        scrollView.addSubview(bottomLoadingView)
+        scrollView.addSubview(leftLoadingView)
+        scrollView.addSubview(rightLoadingView)
+        
     }
     
     // 預載畫面(預載上一頁及下一頁)
@@ -159,12 +180,23 @@ extension ZoomViewer {
         
         numberOfViews = dataSource.zoomViewerNumberOfViews(self)
         if direction == .horizontal {
-            scrollView.contentSize = .init(width: frame.width * scaleFactor * CGFloat(numberOfViews), height: frame.height * scaleFactor)
+            scrollView.contentSize = .init(
+                width: frame.width * scaleFactor * CGFloat(numberOfViews),
+                height: frame.height * scaleFactor
+            )
         }
         else {
-            scrollView.contentSize = .init(width: frame.width * scaleFactor, height: frame.height * scaleFactor * CGFloat(numberOfViews))
+            scrollView.contentSize = .init(
+                width: frame.width * scaleFactor,
+                height: frame.height * scaleFactor * CGFloat(numberOfViews)
+            )
         }
-        contentView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        contentView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: scrollView.contentSize.width,
+            height: scrollView.contentSize.height
+        )
         
         if numberOfViews > 0 {
             preloadContentViewAt(index: currentIndex)
@@ -193,6 +225,95 @@ extension ZoomViewer {
     }
 }
 
+// Refreshing
+extension ZoomViewer {
+    public func endRefreshing() {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            if self?.topLoadingView.isAnimating == true {
+                self?.topLoadingView.stopAnimating()
+            }
+            else if self?.bottomLoadingView.isAnimating == true {
+                self?.bottomLoadingView.stopAnimating()
+            }
+            else if self?.leftLoadingView.isAnimating == true {
+                self?.leftLoadingView.stopAnimating()
+            }
+            else if self?.rightLoadingView.isAnimating == true {
+                self?.rightLoadingView.stopAnimating()
+            }
+            self?.scrollView.contentInset = .zero
+        }
+    }
+    
+    fileprivate func handleScrollViewDidScroll() {
+        if direction == .horizontal {
+            if delegate?.zoomViewerWillRefreshLeft(self) == true, scrollView.contentOffset.x <= -50 {
+                leftLoadingView.frame = .init(
+                    x: -50,
+                    y: 0,
+                    width: 50,
+                    height: scrollView.frame.height
+                )
+                leftLoadingView.startAnimating()
+            }
+            else if delegate?.zoomViewerWillRefreshRight(self) == true, scrollView.contentOffset.x >= contentView.frame.width - scrollView.frame.width + 50 {
+                rightLoadingView.frame = .init(
+                    x: contentView.frame.width,
+                    y: 0,
+                    width: 50,
+                    height: scrollView.frame.height
+                )
+                rightLoadingView.startAnimating()
+            }
+            else {
+                leftLoadingView.stopAnimating()
+                rightLoadingView.stopAnimating()
+            }
+        }
+        else {
+            if delegate?.zoomViewerWillRefreshTop(self) == true, scrollView.contentOffset.y <= -50 {
+                topLoadingView.startAnimating()
+            }
+            else if delegate?.zoomViewerWillRefreshBottom(self) == true, scrollView.contentOffset.y >= contentView.frame.height - scrollView.frame.height + 50 {
+                bottomLoadingView.frame = .init(
+                    x: 0,
+                    y: contentView.frame.height,
+                    width: scrollView.frame.width,
+                    height: 50
+                )
+                bottomLoadingView.startAnimating()
+            }
+            else {
+                topLoadingView.stopAnimating()
+                bottomLoadingView.stopAnimating()
+            }
+        }
+    }
+    
+    fileprivate func handleScrollviewdidEndDragging() {
+        if topLoadingView.isAnimating {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.scrollView.contentInset = .init(top: 50.0, left: 0.0, bottom: 0.0, right: 0.0)
+            }
+        }
+        else if bottomLoadingView.isAnimating {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.scrollView.contentInset = .init(top: 0.0, left: 0.0, bottom: 50.0, right: 0.0)
+            }
+        }
+        else if leftLoadingView.isAnimating {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.scrollView.contentInset = .init(top: 0.0, left: 50.0, bottom: 0.0, right: 0.0)
+            }
+        }
+        else if rightLoadingView.isAnimating {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.scrollView.contentInset = .init(top: 0.0, left: 0.0, bottom: 0.0, right: 50.0)
+            }
+        }
+    }
+}
+
 extension ZoomViewer: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 縮放(isZooming)跟縮放反彈(isZoomBouncing)的時候 scrollViewDidScroll 也會被呼叫，這時候不要 preloadContentViewAt 因為這時候還不知道正確的 scale factor 會造成計算錯誤
@@ -200,23 +321,20 @@ extension ZoomViewer: UIScrollViewDelegate {
             return
         }
         preloadContentViewAt(index: currentIndex)
+        handleScrollViewDidScroll()
     }
     
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentView
     }
-    
+
     public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         // 將最後的縮放值記錄下來
         scaleFactor = scale
         preloadContentViewAt(index: currentIndex)
     }
-    
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("scrollViewWillBeginDragging")
-    }
-    
+
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("scrollViewDidEndDragging")
+        handleScrollviewdidEndDragging()
     }
 }

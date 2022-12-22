@@ -8,6 +8,12 @@ extension ZoomViewer {
     }
     
     @discardableResult
+    public func setDelegate(_ delegate: ZoomViewerDelegate) -> Self {
+        self.delegate = delegate
+        return self
+    }
+    
+    @discardableResult
     public func setMinimumZoomScale(_ scale: CGFloat) -> Self {
         minimumZoomScale = scale
         return self
@@ -34,12 +40,6 @@ extension ZoomViewer {
     @discardableResult
     public func setShowsVerticalScrollIndicator(_ show: Bool) -> Self {
         showsVerticalScrollIndicator = show
-        return self
-    }
-    
-    @discardableResult
-    public func setBouncesZoom(_ enabled: Bool) -> Self {
-        bouncesZoom = enabled
         return self
     }
 }
