@@ -109,15 +109,76 @@ let view = UIView()
 
 ## Zoom Viewer
 
-- A viewer for display view with zoom
+A viewer for display view with zoom
+
+- Create zoom viewer
 
 ```
+// A image array will show by zoom viewer
+var images = [UIImage]()
+
 let zoomViewer = ZoomViewer()
-
-// 左右滑動
-        zoomViewer.direction = .horizontal
-        // 上下滑動
-        zoomViewer.direction = .vertical
+	.setFrame(.init(x: 50, y: 50, width: 300, height: 500))
+    .setDataSource(self)
+    .setDelegate(self)
+    .setMinimumZoomScale(1)
+    .setMaximumZoomScale(3)
+    .setDirection(.horizontal)
+    .setShowsHorizontalScrollIndicator(false)
+    .setShowsVerticalScrollIndicator(false)
+    .setCurrentIndex(5)
 
 ```
+- Set dataSource
+
+```
+extension YourViewController: ZoomViewerDataSource {
+    func zoomViewerCreateView() -> UIView {
+		 // Return the view you want to use
+		 UIImageView()
+    }
+    
+    func zoomViewerNumberOfViews(_ zoomViewer: ZoomViewer) -> Int {
+        // Return the total size
+        images.count
+    }
+    
+    func zoomViewer(_ zoomViewer: ZoomViewer, view: UIView, atIndex index: Int) -> UIView {
+        // Edit the view to display the content you want
+        if let imageView = view as? UIImageView {
+            imageView.image = images[index]
+        }
+        return view
+    }
+}
+```
+
+- Set delegate
+
+```
+extension ViewController: ZoomViewerDelegate {
+    // Return true to show the refreshing loading view
+    func zoomViewerWillRefreshTop(_ zoomViewer: ZoomViewer) -> Bool {
+        true
+    }
+    func zoomViewerWillRefreshBottom(_ zoomViewer: ZoomViewer) -> Bool {
+        true
+    }
+    func zoomViewerWillRefreshLeft(_ zoomViewer: ZoomViewer) -> Bool {
+        true
+    }
+    func zoomViewerWillRefreshRight(_ zoomViewer: ZoomViewer) -> Bool {
+        true
+    }
+}
+```
+
+- Refresh Completed
+
+```
+// call endRefreshing when you want to stop the refresh loading view
+zoomViewer.endRefreshing()
+```
+
+
 
