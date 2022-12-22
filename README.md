@@ -118,7 +118,7 @@ A viewer for display view with zoom
 var images = [UIImage]()
 
 let zoomViewer = ZoomViewer()
-	.setFrame(.init(x: 50, y: 50, width: 300, height: 500))
+    .setFrame(.init(x: 50, y: 50, width: 300, height: 500))
     .setDataSource(self)
     .setDelegate(self)
     .setMinimumZoomScale(1)
