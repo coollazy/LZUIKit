@@ -107,3 +107,17 @@ let view = UIView()
 	.setCornerLength(10)
 ```
 
+## Zoom Viewer
+
+- A viewer for display view with zoom
+
+```
+let zoomViewer = ZoomViewer()
+
+// 左右滑動
+        zoomViewer.direction = .horizontal
+        // 上下滑動
+        zoomViewer.direction = .vertical
+
+```
+

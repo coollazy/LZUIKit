@@ -104,4 +104,8 @@ Pod::Spec.new do |s|
     ss.dependency "RxSwift", "~> 5.0"
     ss.dependency "RxCocoa", "~> 5.0"
   end
+  
+  s.subspec "ZoomViewer" do |ss|
+    ss.source_files = "Sources/LZUIKit/ZoomViewer/**/*.{swift}"
+  end
 end
