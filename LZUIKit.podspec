@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = "LZUIKit"
-  s.version         = "1.0.0"
+  s.version         = "1.1.0"
   s.swift_version   = "5.0.0"
   s.summary         = "LZUIKit"
   s.description     = <<-DESC
@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
     ss.dependency "LZUIKit/OptionTextField"
     ss.dependency "LZUIKit/TableViewEmptyMessage"
     ss.dependency "LZUIKit/View"
+    ss.dependency "LZUIKit/ZoomViewer"
   end
 
   s.subspec "RxSwift" do |ss|
