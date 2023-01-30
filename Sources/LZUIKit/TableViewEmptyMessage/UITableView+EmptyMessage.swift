@@ -64,6 +64,7 @@ extension UITableView {
         set {
             let key: StaticString = "isHiddenEmptyMessage"
             objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            setNeedsLayout()
         }
     }
 
