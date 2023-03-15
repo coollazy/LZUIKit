@@ -1,10 +1,18 @@
 import UIKit
 
 extension UIViewController {
-    fileprivate var loadingView: UIView {
+    // Loading畫面。有預設樣式，可放客製化的View
+    public var loadingView: UIView {
         get {
             let key: StaticString = "UIViewController+loadingView"
-            return objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView ?? createLoadingView()
+            if var view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView {
+                return view
+            }
+            else {
+                let view = createLoadingView()
+                objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return view
+            }
         }
         set {
             let key: StaticString = "UIViewController+loadingView"
@@ -51,24 +59,38 @@ extension UIViewController {
         return view
     }
     
-    public func showLoadingView() {
+    public func showLoadingView(duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) {
         guard loadingView.superview == nil else {
+            print("[WARNING] Try to showLoadingView, but loadingView already has superview")
             return
         }
         loadingView.alpha = 0
         UIApplication.shared.keyWindow?.addSubview(loadingView)
-        UIViewPropertyAnimator(duration: 0.3, curve: .linear) { [weak self] in
+        UIViewPropertyAnimator(duration: duration, curve: curve) { [weak self] in
             self?.loadingView.alpha = 1
         }
         .startAnimation()
     }
     
-    public func hideLoadingView() {
+    public func showLoadingView(in view: UIView, duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) {
+        guard loadingView.superview == nil else {
+            print("[WARNING] Try to showLoadingView, but loadingView already has superview")
+            return
+        }
+        loadingView.alpha = 0
+        view.addSubview(loadingView)
+        UIViewPropertyAnimator(duration: duration, curve: curve) { [weak self] in
+            self?.loadingView.alpha = 1
+        }
+        .startAnimation()
+    }
+    
+    public func hideLoadingView(duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) {
         guard loadingView.superview != nil else {
             return
         }
         loadingView.alpha = 1
-        let animator = UIViewPropertyAnimator(duration: 0.3, curve: .linear) { [weak self] in
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) { [weak self] in
             self?.loadingView.alpha = 0
         }
         animator.addCompletion({ [weak self] _ in

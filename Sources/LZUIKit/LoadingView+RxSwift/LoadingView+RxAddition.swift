@@ -12,4 +12,14 @@ extension Reactive where Base: UIViewController {
             }
         }
     }
+    
+    public func showLoadingView(in view: UIView, duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) -> Binder<Bool> {
+        Binder(self.base) { controller, show in
+            if show {
+                controller.showLoadingView(in: view, duration: duration, curve: curve)
+            } else {
+                controller.hideLoadingView()
+            }
+        }
+    }
 }

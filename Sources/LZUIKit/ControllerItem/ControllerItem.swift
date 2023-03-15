@@ -5,6 +5,11 @@ public class ControllerItem: Codable {
     public let controller: String
     public let nibName: String?
     
+    public init() {
+        self.controller = "UIViewController"
+        self.nibName = nil
+    }
+    
     public init(controller: String, nibName: String? = nil) {
         self.controller = controller
         self.nibName = nibName
