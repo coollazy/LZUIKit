@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = "LZUIKit"
-  s.version         = "1.1.1"
+  s.version         = "1.1.2"
   s.swift_version   = "5.0.0"
   s.summary         = "LZUIKit"
   s.description     = <<-DESC
