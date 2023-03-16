@@ -9,13 +9,13 @@ LZUIKit is an extension of UIKit
 - Basic version
 
 ```
-pod 'LZUIKit', '~> 1.1.2'
+pod 'LZUIKit', '~> 2.0.0'
 ```
 
 - RxSwift supported
 
 ```
-pod 'LZUIKit+RxSwift', '~> 1.1.2'
+pod 'LZUIKit+RxSwift', '~> 2.0.0'
 ```
 
 ### SPM
@@ -23,7 +23,7 @@ pod 'LZUIKit+RxSwift', '~> 1.1.2'
 - Package.swift 的 dependencies 增加
 
 ```
-.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "1.1.2")),
+.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "2.0.0")),
 ```
 
 - target 的 dependencies 增加
