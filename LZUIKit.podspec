@@ -42,8 +42,8 @@ Pod::Spec.new do |s|
   s.subspec "Button+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/Button+RxSwift/**/*.{swift}"
     ss.dependency "LZUIKit/Button"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "ControllerItem" do |ss|
@@ -53,8 +53,8 @@ Pod::Spec.new do |s|
   s.subspec "ControllerItem+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/ControllerItem+RxSwift/**/*.{swift}"
     ss.dependency "LZUIKit/ControllerItem"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "LoadingView" do |ss|
@@ -64,8 +64,8 @@ Pod::Spec.new do |s|
   s.subspec "LoadingView+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/LoadingView+RxSwift/**/*.{swift}"
     ss.dependency "LZUIKit/LoadingView"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "OptionTextField" do |ss|
@@ -75,8 +75,8 @@ Pod::Spec.new do |s|
   s.subspec "OptionTextField+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/OptionTextField+RxSwift/**/*.{swift}"
     ss.dependency "LZUIKit/OptionTextField"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "TableViewEmptyMessage" do |ss|
@@ -86,8 +86,8 @@ Pod::Spec.new do |s|
   s.subspec "TableViewEmptyMessage+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/TableViewEmptyMessage+RxSwift/**/*.{swift}"
     ss.dependency "LZUIKit/TableViewEmptyMessage"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "View" do |ss|
@@ -96,14 +96,14 @@ Pod::Spec.new do |s|
 
   s.subspec "ViewController+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/ViewController+RxSwift/**/*.{swift}"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
 
   s.subspec "TabBarController+RxSwift" do |ss|
     ss.source_files = "Sources/LZUIKit/TabBarController+RxSwift/**/*.{swift}"
-    ss.dependency "RxSwift", "~> 5.0"
-    ss.dependency "RxCocoa", "~> 5.0"
+    ss.dependency "RxSwift", "~> 6"
+    ss.dependency "RxCocoa", "~> 6"
   end
   
   s.subspec "ZoomViewer" do |ss|
