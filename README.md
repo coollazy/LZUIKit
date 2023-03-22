@@ -37,13 +37,29 @@ pod 'LZUIKit+RxSwift', '~> 2.0.0'
 ## Button
 
 - Create a UIButton
-- Set the background color for visibled(default is clear) and disabled(default is gray)
-- Set the isVisibled to true or false
+- Set the title color for visibled and disabled
+- Set the background color for visibled and disabled
+- Set the isVisibled to true or false to show the visible or disable color of the title and background
 
 ```
 let button = UIButton()
-    .setVisibledBackgroundColor(.yellow)
-    .setDisabledBackgroundColor(.gray)
+	.setVisibledTitleColor(.white)
+    .setDisabledTitleColor(.black)
+    .setVisibledBackgroundColor(.red)
+    .setDisabledBackgroundColor(.lightGray)
+    .setIsVisibled(true)
+```
+
+- Or you can set the onVisibled and onDisabled for your own styles
+
+```
+let button = UIButton()
+	.setOnVisibled({
+        $0.setTitle("It's visibled now", for: .normal)
+    })
+    .setOnDisabled({
+        $0.setTitle("It's disabled now", for: .normal)
+    })
     .setIsVisibled(true)
 ```
 
