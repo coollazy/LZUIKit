@@ -15,7 +15,7 @@ extension UIButton {
             newValue ? onVisibled?(self) : onDisabled?(self)
             
             if let visibledTitleColor = visibledTitleColor, let disabledTitleColor = disabledTitleColor {
-                setTitleColor(newValue ? visibledTitleColor : disabledBackgroundColor, for: .normal)
+                setTitleColor(newValue ? visibledTitleColor : disabledTitleColor, for: .normal)
             }
             
             if let visibledBackgroundColor = visibledBackgroundColor, let disabledBackgroundColor = disabledBackgroundColor {

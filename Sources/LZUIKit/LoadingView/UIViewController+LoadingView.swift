@@ -5,7 +5,7 @@ extension UIViewController {
     public var loadingView: UIView {
         get {
             let key: StaticString = "UIViewController+loadingView"
-            if var view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView {
+            if let view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView {
                 return view
             }
             else {
