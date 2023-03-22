@@ -99,12 +99,30 @@ let tableView = UITableView()
 
 ## View Corner
 
-- Make a corner to the UIView, and all the sub class of the UIView
+- Make a corner radius to the UIView, and all the sub class of the UIView
+- Set the corner length
 
 ```
 let view = UIView()
-    .setCornerType(.halfCorner)
     .setCornerLength(10)
+```
+
+- Or set the CornerType as follow
+	- none => Mean corner radius is equal to 0
+	- bit => Divide the smaller of the height and width by 15
+	- small => Divide the smaller of the height and width by 5
+	- medium => Divide the smaller of the height and width by 4
+	- large => Divide the smaller of the height and width by 3
+	- halfCorner => Divide the smaller of the height and width by 2
+
+```
+let view = UIView()
+    .setCornerType(.none)
+    .setCornerType(.bit)
+    .setCornerType(.small)
+    .setCornerType(.medium)
+    .setCornerType(.large)
+    .setCornerType(.halfCorner)
 ```
 
 ## Zoom Viewer
