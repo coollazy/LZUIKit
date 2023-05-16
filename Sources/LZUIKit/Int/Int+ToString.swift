@@ -1,6 +1,6 @@
 import Foundation
 
-extension Double {
+extension Int {
     public var string: String {
         get {
             String(self)
