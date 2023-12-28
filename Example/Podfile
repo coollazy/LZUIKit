@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '11.0'
+
+target 'Example' do
+  use_frameworks!
+
+  pod 'LZUIKit', :path => '../'
+#  pod 'LZUIKit/RxSwift', :path => '../'
+end
