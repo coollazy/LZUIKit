@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = "LZUIKit"
-  s.version         = "2.1.1"
+  s.version         = "3.0.0"
   s.swift_version   = "5.0.0"
   s.summary         = "LZUIKit"
   s.description     = <<-DESC
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage        = "https://github.com/coollazy/LZUIKit.git"
   s.license         = "MIT"
   s.author          = { "ven.wu" => "ven.wu.github@gamil.com" }
-  s.platform        = :ios, "10.0"
+  s.platform        = :ios, "12.0"
   s.source          = { :git => "https://github.com/coollazy/LZUIKit.git", :tag => s.version }
   s.default_subspec = "Core"
 
