@@ -32,7 +32,6 @@ Pod::Spec.new do |s|
     ss.dependency "LZUIKit/String"
     ss.dependency "LZUIKit/TableViewEmptyMessage"
     ss.dependency "LZUIKit/UIColor"
-    ss.dependency "LZUIKit/UITextField"
     ss.dependency "LZUIKit/URL"
     ss.dependency "LZUIKit/TableViewEmptyMessage"
     ss.dependency "LZUIKit/View"
@@ -155,10 +154,6 @@ Pod::Spec.new do |s|
 
   s.subspec "UIColor" do |ss|
     ss.source_files = "Sources/LZUIKit/UIColor/**/*.{swift}"
-  end
-
-  s.subspec "UITextField" do |ss|
-    ss.source_files = "Sources/LZUIKit/UITextField/**/*.{swift}"
   end
 
   s.subspec "URL" do |ss|

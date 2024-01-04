@@ -35,7 +35,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let className = "Example\(items[indexPath.row])"
+        let className = "Example\(items[indexPath.row])ViewController"
         let controllerItem = ControllerItem(controller: className)
         if let viewController = controllerItem.viewController {
             navigationController?.pushViewController(viewController, animated: true)

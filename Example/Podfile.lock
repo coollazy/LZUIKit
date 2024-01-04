@@ -22,7 +22,6 @@ PODS:
     - LZUIKit/String
     - LZUIKit/TableViewEmptyMessage
     - LZUIKit/UIColor
-    - LZUIKit/UITextField
     - LZUIKit/URL
     - LZUIKit/View
     - LZUIKit/ZoomViewer
@@ -44,7 +43,6 @@ PODS:
   - LZUIKit/String (2.1.1)
   - LZUIKit/TableViewEmptyMessage (2.1.1)
   - LZUIKit/UIColor (2.1.1)
-  - LZUIKit/UITextField (2.1.1)
   - LZUIKit/URL (2.1.1)
   - LZUIKit/View (2.1.1)
   - LZUIKit/ZoomViewer (2.1.1)
@@ -57,7 +55,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZUIKit: 59ed585cd595cd0289fdd04d49b75c4b3b9026e8
+  LZUIKit: 4b52bd3fdacd4695f2c0d2a6d07051b7672c5b78
 
 PODFILE CHECKSUM: 60a288bacfc1150fa5332a731ce40d2eacc943db
 
