@@ -1,16 +1,15 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "RxSwift",
-        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "cec68169a048a079f461ba203fe85636548d7a89",
-          "version": "5.1.3"
-        }
+  "originHash" : "8579d08eb6c44edeed3106932e7f2e60f5e4b70c58742f6873ab8abbce772c29",
+  "pins" : [
+    {
+      "identity" : "lzfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coollazy/LZFoundation.git",
+      "state" : {
+        "revision" : "a465b1a52ac0d485811f0bb05a8c448278b6454c",
+        "version" : "1.0.0"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 3
 }

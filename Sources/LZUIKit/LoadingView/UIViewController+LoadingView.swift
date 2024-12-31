@@ -99,5 +99,3 @@ extension UIViewController {
         animator.startAnimation()
     }
 }
-
-

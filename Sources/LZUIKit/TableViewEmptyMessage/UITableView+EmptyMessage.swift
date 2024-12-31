@@ -115,4 +115,3 @@ extension UITableView {
         _ = self.swizzleImplementation
     }
 }
-
