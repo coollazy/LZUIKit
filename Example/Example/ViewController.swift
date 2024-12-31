@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  Example
-//
-//  Created by Ven on 2023/12/21.
-//
-
+import UIKit
 import LZUIKit
 
 class ViewController: UIViewController {

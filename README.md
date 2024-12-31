@@ -4,20 +4,6 @@ LZUIKit is an extension of UIKit
 
 # How to install
 
-### CocoaPods
-
-- Basic version
-
-```
-pod 'LZUIKit', '~> 3.0.0'
-```
-
-- RxSwift supported
-
-```
-pod 'LZUIKit+RxSwift', '~> 3.0.0'
-```
-
 ### SPM
 
 - Package.swift 的 dependencies 增加
