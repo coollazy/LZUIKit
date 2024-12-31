@@ -1,6 +1,6 @@
 # LZUIKit
 
-LZUIKit is an extension of UIKit
+Extensions of Native UIKit
 
 # How to install
 
