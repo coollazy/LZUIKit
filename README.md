@@ -9,7 +9,7 @@ Extensions of Native UIKit
 - Package.swift 的 dependencies 增加
 
 ```
-.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "4.0.1")),
+.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "4.0.2")),
 ```
 
 - target 的 dependencies 增加
