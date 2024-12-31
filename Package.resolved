@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coollazy/LZFoundation.git",
       "state" : {
-        "revision" : "a465b1a52ac0d485811f0bb05a8c448278b6454c",
-        "version" : "1.0.0"
+        "revision" : "a7295c1579bb55404f0af2323583d667d0ac5f5a",
+        "version" : "1.0.1"
       }
     }
   ],
