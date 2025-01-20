@@ -9,9 +9,3 @@ extension UIColor {
         }
     }
 }
-
-extension UIImage {
-    public static func withColor(_ color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        color.image(size)
-    }
-}
