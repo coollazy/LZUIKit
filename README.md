@@ -31,7 +31,7 @@ Extensions of the Native UIKit
 
 	```swift
 	let button = UIButton()
-		.setVisibledTitleColor(.white)
+	    .setVisibledTitleColor(.white)
 	    .setDisabledTitleColor(.black)
 	    .setVisibledBackgroundColor(.red)
 	    .setDisabledBackgroundColor(.lightGray)
@@ -42,7 +42,7 @@ Extensions of the Native UIKit
 
 	```swift
 	let button = UIButton()
-		.setOnVisibled({
+	    .setOnVisibled({
 	        $0.setTitle("It's visibled now", for: .normal)
 	    })
 	    .setOnDisabled({
