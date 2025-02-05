@@ -6,11 +6,11 @@ public extension CIImage {
         filter?.setDefaults()
         filter?.setValue(text.data(using: .utf8), forKeyPath: "inputMessage")
         filter?.setValue("H", forKey: "inputCorrectionLevel")
-        guard let cgImage = filter?.outputImage?.cgImage else {
+        guard let ciImage = filter?.outputImage else {
             return nil
         }
         
-        return .init(cgImage: cgImage)
+        return ciImage
             .tinted(color: tintColor)?
             .transformed(by: transform)
     }
