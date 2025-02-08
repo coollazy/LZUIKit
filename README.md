@@ -9,7 +9,7 @@ Extensions of the Native UIKit
 - Package.swift 的 dependencies 增加
 
 	```
-	.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "4.1.1")),
+	.package(name: "LZUIKit", url: "https://github.com/coollazy/LZUIKit.git", .upToNextMajor(from: "4.2.0")),
 	```
 
 - target 的 dependencies 增加
@@ -93,11 +93,35 @@ Extensions of the Native UIKit
 	let viewController: UIViewController? = controllerItem.viewController
 	```
 
-## LoadingView
+## Loading View
 
-- This is UIViewController's extension
+- Add Protocol Loading to ViewController
+
+	```swift
+	// Add Loading to ViewController
+	class ViewController: UIViewController, Loading {}
+	```
+
 - Call `showLoadingView` using the view controller instance while you want to show loading view
 - Call `hideLoadingView` using the view controller instance while you want to hide loading view
+- Set custom loading view
+
+	```swift
+	class ViewController: UIViewController, Loading {
+		// Set CustomLoadingView as loadingView
+		var loadingView: UIView = CustomLoadingView()
+	}
+	```
+
+- Set global custom loading view
+
+	```swift
+	extension UIViewController {
+	    static var loadingView: UIView {
+	        CustomLoadingView()
+	    }
+	}
+	```
 
 
 ## OptionTextField
