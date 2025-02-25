@@ -37,7 +37,7 @@ open class SegmentedController: ScrollController {
         super.setViewControllers(viewControllers)
     }
 
-    override func setSelected(viewController: UIViewController, shouldScroll: Bool = true) {
+    open override func setSelected(viewController: UIViewController, shouldScroll: Bool = true) {
         super.setSelected(viewController: viewController, shouldScroll: shouldScroll)
 
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else {
