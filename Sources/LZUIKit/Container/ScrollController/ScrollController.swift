@@ -1,6 +1,8 @@
 import UIKit
+import Combine
 
 open class ScrollController: ContainerController {
+    private var cancellables = Set<AnyCancellable>()
     private var viewWillAppearOnce = false
     private var viewDidAppearOnce = false
     private var _selectedViewController: UIViewController?
@@ -12,7 +14,6 @@ open class ScrollController: ContainerController {
         scrollView.isScrollEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.delegate = self
         return scrollView
     }()
 
@@ -61,6 +62,27 @@ open class ScrollController: ContainerController {
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+        
+        
+        scrollView.publisher(for: \.contentOffset)
+            .map { [weak self] point -> Int in
+                if point.x == 0 {
+                    return 0
+                }
+                if let width = self?.scrollView.frame.width {
+                    return Int(round(point.x / width))
+                }
+                return 0
+            }
+            .removeDuplicates()
+            .sink { [weak self] index in
+                let count = self?.viewControllers.count ?? 0
+                let selectedIndex = self?.selectedIndex ?? 0
+                if index < count, index != selectedIndex, let viewController = self?.viewControllers[index] {
+                    self?.setSelected(viewController: viewController, shouldScroll: false)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -176,28 +198,5 @@ extension ScrollController {
         viewController.endAppearanceTransition()
         viewController.removeFromParent()
         _selectedViewController = nil
-    }
-}
-
-extension ScrollController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let point = scrollView.contentOffset
-        
-        var index = 0
-        if point.x == 0 {
-            index = 0
-        }
-        else {
-            index = Int(round(point.x / scrollView.frame.width))
-        }
-        
-        guard index != selectedIndex else {
-            return
-        }
-        
-        if index < viewControllers.count {
-            let viewController = viewControllers[index]
-            setSelected(viewController: viewController, shouldScroll: false)
-        }
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIScrollView {
+public extension UIScrollView {
     var currenttPageIndex: Int {
         get {
             Int(contentOffset.x / frame.width)
