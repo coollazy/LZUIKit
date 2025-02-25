@@ -160,7 +160,7 @@ open class ScrollController: ContainerController {
         setSelected(viewController: viewControllers[index])
     }
 
-    func setSelected(viewController: UIViewController, shouldScroll: Bool = true) {
+    open func setSelected(viewController: UIViewController, shouldScroll: Bool = true) {
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else {
             print("[Error][ScrollController] setSelected(viewController: \(viewController)), viewController is not exist")
             return
