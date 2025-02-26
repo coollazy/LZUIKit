@@ -13,7 +13,7 @@ class LoadingView: UIView {
     lazy var indicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         view.hidesWhenStopped = true
-        view.style = .gray
+        view.style = .medium
         view.startAnimating()
         return view
     }()
