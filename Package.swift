@@ -17,7 +17,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/coollazy/LZFoundation.git", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/coollazy/LZFoundation.git", .upToNextMajor(from: "1.1.0")),
     ],
     targets: [
         .target(
