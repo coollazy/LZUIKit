@@ -1,13 +1,13 @@
 {
-  "originHash" : "ec39edab4b29ff03dce8f6c97be373c852900ad6db755de3576854a918258e5a",
+  "originHash" : "bcdf9f08796b811ff1efc750769aca537ce035628ea7d31defff89060632923f",
   "pins" : [
     {
       "identity" : "lzfoundation",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coollazy/LZFoundation.git",
       "state" : {
-        "revision" : "a7295c1579bb55404f0af2323583d667d0ac5f5a",
-        "version" : "1.0.1"
+        "revision" : "9f05524802a81ae629ebfdf8ba1faae134f276eb",
+        "version" : "1.1.0"
       }
     }
   ],
