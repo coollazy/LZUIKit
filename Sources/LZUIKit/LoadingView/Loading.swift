@@ -50,7 +50,8 @@ public extension Loading {
     
     func showLoadingView(duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) {
         // TODO: 支援 ios15 之後取得 window 的寫法
-        guard let window = UIApplication.shared.windows.first else {
+        let window = UIApplication.shared.windows.last { $0.isKeyWindow }
+        guard let window = window else {
             print("[WARNING] Try to showLoadingView, but transitionView already has superview")
             return
         }
