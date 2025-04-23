@@ -10,14 +10,4 @@ public extension UIWindow {
         window.isUserInteractionEnabled = false
         return window
     }
-    
-    static func toastLevelWindow(windowScene: UIWindowScene) -> UIWindow {
-        let window = UIWindow(windowScene: windowScene)
-        window.windowLevel = .alert + 2
-        window.frame = UIScreen.main.bounds
-        window.backgroundColor = .clear
-        window.isHidden = false
-        window.isUserInteractionEnabled = false
-        return window
-    }
 }
