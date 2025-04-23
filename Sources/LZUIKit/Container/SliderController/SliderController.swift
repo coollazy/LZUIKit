@@ -18,10 +18,10 @@ open class SliderController: ScrollController {
             control.heightAnchor.constraint(equalToConstant: 42),
         ])
         
-        let constraints = scrollView.superview?.constraints.filter({ constraint in
-            constraint.firstItem is UIScrollView || constraint.secondItem is UIScrollView
-        }) ?? []
+        let constraints = view.constraints
+            .filter { ($0.firstItem as? NSObject) == scrollView || ($0.secondItem as? UIScrollView) == scrollView }
         NSLayoutConstraint.deactivate(constraints)
+        view.removeConstraints(constraints)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 42),
