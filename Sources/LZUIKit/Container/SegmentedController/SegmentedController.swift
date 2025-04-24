@@ -1,13 +1,13 @@
 import UIKit
 
 open class SegmentedController: ScrollController {
-    public lazy var segmentedControl = {
+    open lazy var segmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.addTarget(self, action: #selector(onSegmentedControlTapped), for: .valueChanged)
         return segmentedControl
     }()
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(segmentedControl)
@@ -18,8 +18,12 @@ open class SegmentedController: ScrollController {
             segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
             segmentedControl.heightAnchor.constraint(equalToConstant: 32),
         ])
-
-        scrollView.removeConstraints(scrollView.constraints)
+        
+        let scrollViewConstraints = view.constraints
+            .filter { ($0.firstItem as? NSObject) == scrollView || ($0.secondItem as? NSObject) == scrollView }
+        NSLayoutConstraint.deactivate(scrollViewConstraints)
+        view.removeConstraints(scrollViewConstraints)
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -28,7 +32,7 @@ open class SegmentedController: ScrollController {
         ])
     }
 
-    public override func setViewControllers(_ viewControllers: [UIViewController]) {
+    open override func setViewControllers(_ viewControllers: [UIViewController]) {
         segmentedControl.removeAllSegments()
         viewControllers.enumerated().forEach({ index, controller in
             segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)

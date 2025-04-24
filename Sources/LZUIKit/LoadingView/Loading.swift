@@ -1,24 +1,78 @@
 import UIKit
 
 public protocol Loading: NSObject {
+    /// Loading畫面的 UIWindow。有預設，可自行指定要使用的 UIWindow
+    static var loadingWindow: UIWindow { get }
+    /// Transition畫面。有預設樣式，可放客製化的View
+    static var transitionView: UIView { get }
     /// Loading畫面。有預設樣式，可放客製化的View
     static var loadingView: UIView { get }
+    
+    /// Loading畫面的 UIWindow。有預設，可自行指定要使用的 UIWindow
+    var loadingWindow: UIWindow { get }
+    /// Transition畫面。有預設樣式，可放客製化的View
+    var transitionView: UIView { get }
     /// Loading畫面。有預設樣式，可放客製化的View
     var loadingView: UIView { get set }
     
+    /// 全畫面顯示 LoadingView，預設顯示在 windowLevel = alert -2
     func showLoadingView(duration: TimeInterval, curve: UIView.AnimationCurve)
+    /// 置中顯示 LoadingView 在指定的 view 上面
     func showLoadingView(in view: UIView, duration: TimeInterval, curve: UIView.AnimationCurve)
+    
     func hideLoadingView(duration: TimeInterval, curve: UIView.AnimationCurve)
 }
 
 public extension Loading {
+    static var loadingWindow: UIWindow {
+        UIWindow.loadingLevelWindow
+    }
+    
+    static var transitionView: UIView {
+        TransitionView()
+    }
+    
     static var loadingView: UIView {
         LoadingView()
+    }
+}
+
+public extension Loading {
+    var loadingWindow: UIWindow {
+        get {
+            let key: StaticString = "Protocol Loading LoadingWindow"
+            guard let view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIWindow else {
+                let view = Self.loadingWindow
+                objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return view
+            }
+            return view
+        }
+        set {
+            let key: StaticString = "Protocol Loading LoadingWindow"
+            objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    var transitionView: UIView {
+        get {
+            let key: StaticString = "Protocol Loading TransitionView"
+            guard let view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView else {
+                let view = Self.transitionView
+                objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return view
+            }
+            return view
+        }
+        set {
+            let key: StaticString = "Protocol Loading TransitionView"
+            objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
     
     var loadingView: UIView {
         get {
-            let key: StaticString = "Protocol LoadingView"
+            let key: StaticString = "Protocol Loading LoadingView"
             guard let view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView else {
                 let view = Self.loadingView
                 objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -27,33 +81,19 @@ public extension Loading {
             return view
         }
         set {
-            let key: StaticString = "Protocol LoadingView"
+            let key: StaticString = "Protocol Loading LoadingView"
             objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    private var transitionView: UIView {
-        get {
-            let key: StaticString = "Protocol TransitionView"
-            guard let view = objc_getAssociatedObject(self, UnsafeRawPointer(key.utf8Start)) as? UIView else {
-                let view = TransitionView()
-                objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                return view
-            }
-            return view
-        }
-        set {
-            let key: StaticString = "Protocol TransitionView"
-            objc_setAssociatedObject(self, UnsafeRawPointer(key.utf8Start), newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
+}
+
+public extension Loading {
     func showLoadingView(duration: TimeInterval = 0.3, curve: UIView.AnimationCurve = .linear) {
-        // TODO: 支援 ios15 之後取得 window 的寫法
-        guard let window = UIApplication.shared.windows.first else {
-            print("[WARNING] Try to showLoadingView, but transitionView already has superview")
-            return
-        }
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .clear
+        let window = loadingWindow
+        window.rootViewController = viewController
+        window.show()
         
         showLoadingView(in: window, duration: duration, curve: curve)
     }
@@ -97,6 +137,7 @@ public extension Loading {
         animator.addCompletion({ [weak self] _ in
             self?.transitionView.removeFromSuperview()
             self?.loadingView.removeFromSuperview()
+            self?.loadingWindow.hide()
         })
         animator.startAnimation()
     }
